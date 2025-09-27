@@ -1,6 +1,10 @@
 name: 64-linux-host
 run-name: Linux x64 binary build
 on: [push]
+permissions:
+    contents: write
+    issues: write
+    pull-requests: write
 jobs:
     config-meson:
         runs-on: ubuntu-latest
@@ -13,4 +17,17 @@ jobs:
                 directory: gh-build
                 options: -w phonycycle=warn
                 meson-version: 1.9.1
+    release-please:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: googleapis/release-please-action@v4
+            - uses: actions/checkout@v5
+              id: release
+              with:
+                release-type: node
+            - name: MVP version 2025-09-25
+              if: $ {{ steps.release.outputs.release_created }}
+              env:
+                GITHUB_TOKEN: ${{ secrets.RELEASE_PLEASE }}
+              run: gh release upload ${{ steps.release.outputs.tag_name }} ./gh-build/typedraw
 
