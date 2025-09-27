@@ -20,4 +20,4 @@ jobs:
             - run: gh release create $VER ./gh-build/typedraw --notes "Created by GitHub Actions."
               env:
                 GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-                VER: meson introspect meson.build --projectinfo | jq -r '.version'
+                VER: "meson introspect meson.build --projectinfo | jq -r '.version'"
