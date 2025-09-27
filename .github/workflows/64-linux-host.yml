@@ -12,4 +12,5 @@ jobs:
                 action: build
                 directory: gh-build
                 options: --warnlevel 3
+                meson-version: 1.9.1
 
