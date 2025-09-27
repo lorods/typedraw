@@ -17,16 +17,7 @@ jobs:
                 directory: gh-build
                 options: -w phonycycle=warn
                 meson-version: 1.9.1
-    release-please:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: googleapis/release-please-action@v4
-            - uses: actions/checkout@v5
-              id: release
-              with:
-                release-type: node
-            - name: MVP version 2025-09-25
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: gh release upload ${{ steps.release.outputs.tag_name }} ./gh-build/typedraw
-
+                VER: meson introspect meson.build --projectinfo | jq -r '.version'
+              run: gh release create $VER ./gh-build/typedraw --notes "Created by GitHub Actions."
