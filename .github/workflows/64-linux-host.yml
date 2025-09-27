@@ -18,6 +18,10 @@ jobs:
                 options: -w phonycycle=warn
                 meson-version: 1.9.1
             - run: echo "VER=$(meson introspect meson.build --projectinfo | jq -r '.version')" >> $GITHUB_ENV
-            - run: gh release create $VER ./gh-build/typedraw --notes "Created by GitHub Actions."
+            - run: gh release create $VER ./gh-build/typedraw --notes "Arch - Linux 64-bit. Created by GitHub Actions."
               env:
-                GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+                GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - uses: stefanzweifel/git-auto-commit-action@v6
+              with:
+                commit_message: Automated remote build
+                file_pattern: '.gh-build/\*typedraw'
