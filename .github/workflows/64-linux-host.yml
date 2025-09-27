@@ -11,6 +11,6 @@ jobs:
               with:
                 action: build
                 directory: gh-build
-                options: --warnlevel 3
+                options: -w phonycycle=warn
                 meson-version: 1.9.1
 
