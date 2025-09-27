@@ -17,7 +17,7 @@ jobs:
                 directory: gh-build
                 options: -w phonycycle=warn
                 meson-version: 1.9.1
-            - run: VER=$(meson introspect meson.build --projectinfo | jq -r '.version')
+            - run: echo "VER=$(meson introspect meson.build --projectinfo | jq -r '.version')" >> $GITHUB_ENV
             - run: gh release create $VER ./gh-build/typedraw --notes "Created by GitHub Actions."
               env:
                 GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
