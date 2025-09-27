@@ -26,8 +26,7 @@ jobs:
               with:
                 release-type: node
             - name: MVP version 2025-09-25
-              if: ${{ steps.release.outputs.release_created }}
               env:
-                GITHUB_TOKEN: ${{ secrets.RELEASE_PLEASE }}
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: gh release upload ${{ steps.release.outputs.tag_name }} ./gh-build/typedraw
 
